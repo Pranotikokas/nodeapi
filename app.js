@@ -1,9 +1,10 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
-var dateTime = require('node-datetime');
-var dt = dateTime.create();
-var formatted;
+// var dateTime = require('node-datetime');
+var moment = require('moment');
+// var dt = dateTime.create();
+// var moment().format();
 
 // var connection = mysql.createConnection({
 //   host:'localhost',
@@ -65,8 +66,8 @@ app.listen(8080);
 
 
 app.get('/',function(req, resp){
-      formatted = dt.format('Y-m-d H:M:S');
-      console.log(formatted);
+      //moment().format() = dt.format('Y-m-d H:M:S');
+      console.log(moment().format());
       console.log("-------------------------------------------------------------------------------");
       console.log("                      Welcome to Walinns Analytics                             ");
       console.log("-------------------------------------------------------------------------------");
@@ -86,7 +87,7 @@ app.get('/devices',function(req, resp){
 });
 
 // app.post('/devices',function(req, res){
-//     console.log("DEVICE INFO API : ",formatted);
+//     console.log("DEVICE INFO API : ",moment().format());
 //     console.log("DEVICE API starts---------------------------------------------------------------------------------");
 //     const project_token = req.headers['authorization'];
 //     const device_id = req.body.device_id;
@@ -199,8 +200,8 @@ app.get('/devices',function(req, resp){
 //
 // });
 app.post('/devices',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("DEVICE INFO API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("DEVICE INFO API : ",moment().format());
     console.log("DEVICE API starts---------------------------------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
@@ -322,8 +323,8 @@ app.post('/devices',function(req, res){
 
 
 app.post('/fetchAppUserDetail',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("fetchAppUserDetail API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("fetchAppUserDetail API : ",moment().format());
     console.log("fetchAppUserDetail API starts---------------------------------------------------");
 		const device_id = req.body.device_id;
 		const active_status = req.body.active_status;
@@ -378,8 +379,8 @@ app.post('/fetchAppUserDetail',function(req, res){
 });
 
 app.post('/events',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("events API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("events API : ",moment().format());
     console.log("Events API starts------------------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
@@ -512,7 +513,7 @@ app.post('/events',function(req, res){
 });
 
 // app.post('/events',function(req, res){
-//     console.log("events API : ",formatted);
+//     console.log("events API : ",moment().format());
 //     console.log("Events API starts------------------------------------------------------------------");
 //     const project_token = req.headers['authorization'];
 //     const device_id = req.body.device_id;
@@ -649,8 +650,8 @@ app.post('/events',function(req, res){
 
 
 app.post('/session',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("sessions API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("sessions API : ",moment().format());
     console.log("SESSION REPORT API START---------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
@@ -706,8 +707,8 @@ app.post('/session',function(req, res){
 
 
 app.post('/crashreport',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("crashreport API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("crashreport API : ",moment().format());
     console.log("CRASH REPORT API START-----------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
@@ -752,8 +753,8 @@ app.post('/crashreport',function(req, res){
 
 
 app.post('/uninstallcount',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("uninstallcount API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("uninstallcount API : ",moment().format());
     console.log("UNINSTALL COUNT API START--------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
@@ -833,8 +834,8 @@ app.post('/uninstallcount',function(req, res){
 });
 
 app.post('/screenview',function(req, res){
-    formatted = dt.format('Y-m-d H:M:S');
-    console.log("screenview API : ",formatted);
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("screenview API : ",moment().format());
     console.log("SCREENVIEW API START-------------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
