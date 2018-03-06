@@ -355,6 +355,14 @@ app.post('/fetchAppUserDetail',function(req, res){
                                       data["Data"] = "Adding values to activedevicedetails when active_status is yes ";
                                       res.json(data);
                                       console.log(result.insertId);
+									  connection.query('SELECT count from users',function(err, rows1, fields){
+                                        var realtime_activeusers = rows1[0].count;
+                                        realtime_activeusers = realtime_activeusers + 1;
+                                        var query = connection.query('UPDATE users SET count = ?', [realtime_activeusers] , function(err, result) {
+                                        });
+                                        console.log(query.sql);
+                                       // data["Data"] = "Token not same. So incrementing the uninstall count by 1 ";
+                                      });
                                       console.log("fetchAppUserDetail API ends----------------------------------------------------");
                                   }
                                 });
@@ -363,6 +371,14 @@ app.post('/fetchAppUserDetail',function(req, res){
                                data["Data"] = "active_status is no. No updates. ";
                                  console.log('active_status is no. No updates. ');
                                res.json(data);
+							   connection.query('SELECT count from users',function(err, rows1, fields){
+                                 var realtime_activeusers = rows1[0].count;
+                                 realtime_activeusers = realtime_activeusers - 1;
+                                 var query = connection.query('UPDATE users SET count = ?', [realtime_activeusers] , function(err, result) {
+                                 });
+                                 console.log(query.sql);
+                                 //data["Data"] = "Token not same. So incrementing the uninstall count by 1 ";
+                               });
                                console.log("fetchAppUserDetail API ends----------------------------------------------------");
 
                              }
