@@ -222,6 +222,7 @@ app.post('/devices',function(req, res){
     const app_version = req.body.app_version;
     const country = req.body.country;
     const date_time = req.body.date_time;
+	const phone_number = req.body.phone_number;
     var data = {
         "Data":""
     };
@@ -252,7 +253,8 @@ app.post('/devices',function(req, res){
                                              app_version : app_version,
                                              country : country,
                                              project_token : project_token,
-                                             updated_at: date_time
+                                             updated_at: date_time,
+											phone_number : phone_number
                                            };
                                       // var condition = {device_id:device_id , project_token:project_token};
                                        var query = connection.query('UPDATE deviceinfodatas SET ? WHERE device_id=? and project_token=?', [post, device_id, project_token] , function(err, result) {});
@@ -285,7 +287,8 @@ app.post('/devices',function(req, res){
                                                        country : country,
                                                        project_token:project_token,
                                                        created_at:date_time,
-                                                       updated_at:date_time
+                                                       updated_at:date_time,
+													   phone_number : phone_number
                                                      };
                                       console.log(values);
                                       connection.query(sql, values, function(error, result){
