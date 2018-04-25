@@ -205,6 +205,9 @@ app.post('/devices',function(req, res){
     console.log("DEVICE API starts---------------------------------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
+	const First_name = req.body.First_name;
+	const Last_name = req.body.Last_name;
+	const phone_number = req.body.phone_number;
     const device_model = req.body.device_model;
     const os_name = req.body.os_name;
     const os_version = req.body.os_version;
@@ -222,7 +225,7 @@ app.post('/devices',function(req, res){
     const app_version = req.body.app_version;
     const country = req.body.country;
     const date_time = req.body.date_time;
-	const phone_number = req.body.phone_number;
+	
     var data = {
         "Data":""
     };
@@ -236,6 +239,9 @@ app.post('/devices',function(req, res){
                                 connection.query(sql,[device_id,project_token ],function(err, rows, fields){
                                    if(rows.length != 0){
                                        var post = {
+											First_name : First_name,
+											Last_name : Last_name,
+											phone_number : phone_number,
                                              device_model: device_model,
                                              os_name: os_name,
                                              os_version : os_version,
@@ -253,8 +259,8 @@ app.post('/devices',function(req, res){
                                              app_version : app_version,
                                              country : country,
                                              project_token : project_token,
-                                             updated_at: date_time,
-											phone_number : phone_number
+                                             updated_at: date_time
+											
                                            };
                                       // var condition = {device_id:device_id , project_token:project_token};
                                        var query = connection.query('UPDATE deviceinfodatas SET ? WHERE device_id=? and project_token=?', [post, device_id, project_token] , function(err, result) {});
@@ -269,6 +275,9 @@ app.post('/devices',function(req, res){
                                        var sql = 'INSERT INTO deviceinfodatas SET ?';
                                        const  values = {
                                                        device_id: device_id,
+													    First_name : First_name,
+														Last_name : Last_name,
+														phone_number : phone_number,
                                                        device_model: device_model,
                                                        os_name: os_name,
                                                        os_version : os_version,
@@ -287,8 +296,7 @@ app.post('/devices',function(req, res){
                                                        country : country,
                                                        project_token:project_token,
                                                        created_at:date_time,
-                                                       updated_at:date_time,
-													   phone_number : phone_number
+                                                       updated_at:date_time
                                                      };
                                       console.log(values);
                                       connection.query(sql, values, function(error, result){
