@@ -223,7 +223,10 @@ app.post('/devices',function(req, res){
     const gender = req.body.gender;
     const language = req.body.language;
     const app_version = req.body.app_version;
+	const sdk_version = req.body.sdk_version;
     const country = req.body.country;
+	const state = req.body.state;
+	const city = req.body.city;
     const date_time = req.body.date_time;
 	
     var data = {
@@ -257,7 +260,10 @@ app.post('/devices',function(req, res){
                                              gender : gender,
                                              language : language,
                                              app_version : app_version,
+											 sdk_version : sdk_version,
                                              country : country,
+											 state : state,
+											 city : city,
                                              project_token : project_token,
                                              updated_at: date_time
 											
@@ -271,6 +277,7 @@ app.post('/devices',function(req, res){
                                    }
                                    else
                                    {
+
                                        console.log(req.body.device_id);
                                        var sql = 'INSERT INTO deviceinfodatas SET ?';
                                        const  values = {
@@ -293,7 +300,10 @@ app.post('/devices',function(req, res){
                                                        gender : gender,
                                                        language : language,
                                                        app_version : app_version,
+													   sdk_version :sdk_version,
                                                        country : country,
+													   state : state,
+													   city : city,
                                                        project_token:project_token,
                                                        created_at:date_time,
                                                        updated_at:date_time
