@@ -236,9 +236,27 @@ app.post('/devices',function(req, res){
   	const state = req.body.state;
   	const city = req.body.city;
     const date_time = req.body.date_time;
-    if (typeof phone_number === 'undefined' || typeof First_name === 'undefined' || typeof Last_name === 'undefined' || typeof state === 'undefined' || typeof city === 'undefined') {
-          phone_number = 'NA';
-      }
+    if (typeof phone_number === 'undefined')
+    {
+      phone_number = 'NA';
+    }
+    if (typeof First_name === 'undefined')
+    {
+      First_name = 'NA';
+    }
+    if (typeof Last_name === 'undefined')
+    {
+      Last_name = 'NA';
+    }
+    if (typeof state === 'undefined')
+    {
+      state = 'NA';
+    }
+    if (typeof city === 'undefined')
+    {
+      city = 'NA';
+    }
+
     var data = {
         "Data":""
     };
