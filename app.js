@@ -21,20 +21,20 @@ var moment = require('moment');
 //   database:'ebdb'
 // });
 //
-// var db_config = {
-//     host:'aa8xup8v02zdo7.c2jcvaebobvq.us-east-2.rds.amazonaws.com',
-//     user:'walinns',
-//     password:'Walinns0077',
-//     database:'ebdb'
-// };
-
-
 var db_config = {
-    host:'localhost',
-    user:'root',
-    password:'',
+    host:'aa8xup8v02zdo7.c2jcvaebobvq.us-east-2.rds.amazonaws.com',
+    user:'walinns',
+    password:'Walinns0077',
     database:'ebdb'
 };
+
+
+// var db_config = {
+//     host:'localhost',
+//     user:'root',
+//     password:'',
+//     database:'ebdb'
+// };
 
 var connection;
 
