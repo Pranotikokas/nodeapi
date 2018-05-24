@@ -20,13 +20,21 @@ var moment = require('moment');
 //   password:'Walinns0077',
 //   database:'ebdb'
 // });
-
+//
 var db_config = {
     host:'aa8xup8v02zdo7.c2jcvaebobvq.us-east-2.rds.amazonaws.com',
     user:'walinns',
     password:'Walinns0077',
     database:'ebdb'
 };
+
+
+// var db_config = {
+//     host:'localhost',
+//     user:'root',
+//     password:'',
+//     database:'ebdb'
+// };
 
 var connection;
 
@@ -205,9 +213,9 @@ app.post('/devices',function(req, res){
     console.log("DEVICE API starts---------------------------------------------------------------------------------");
     const project_token = req.headers['authorization'];
     const device_id = req.body.device_id;
-	const First_name = req.body.First_name;
-	const Last_name = req.body.Last_name;
-	const phone_number = req.body.phone_number;
+  	const First_name = req.body.First_name;
+  	const Last_name = req.body.Last_name;
+  	const phone_number = req.body.phone_number;
     const device_model = req.body.device_model;
     const os_name = req.body.os_name;
     const os_version = req.body.os_version;
@@ -223,12 +231,14 @@ app.post('/devices',function(req, res){
     const gender = req.body.gender;
     const language = req.body.language;
     const app_version = req.body.app_version;
-	const sdk_version = req.body.sdk_version;
+	  const sdk_version = req.body.sdk_version;
     const country = req.body.country;
-	const state = req.body.state;
-	const city = req.body.city;
+  	const state = req.body.state;
+  	const city = req.body.city;
     const date_time = req.body.date_time;
-	
+    if (typeof phone_number === 'undefined' || typeof First_name === 'undefined' || typeof Last_name === 'undefined' || typeof state === 'undefined' || typeof city === 'undefined') {
+          phone_number = 'NA';
+      }
     var data = {
         "Data":""
     };
@@ -242,9 +252,9 @@ app.post('/devices',function(req, res){
                                 connection.query(sql,[device_id,project_token ],function(err, rows, fields){
                                    if(rows.length != 0){
                                        var post = {
-											First_name : First_name,
-											Last_name : Last_name,
-											phone_number : phone_number,
+                        										 First_name : First_name,
+                        										 Last_name : Last_name,
+                        										 phone_number : phone_number,
                                              device_model: device_model,
                                              os_name: os_name,
                                              os_version : os_version,
@@ -260,13 +270,12 @@ app.post('/devices',function(req, res){
                                              gender : gender,
                                              language : language,
                                              app_version : app_version,
-											 sdk_version : sdk_version,
+											                       sdk_version : sdk_version,
                                              country : country,
-											 state : state,
-											 city : city,
+											                       state : state,
+											                       city : city,
                                              project_token : project_token,
                                              updated_at: date_time
-											
                                            };
                                       // var condition = {device_id:device_id , project_token:project_token};
                                        var query = connection.query('UPDATE deviceinfodatas SET ? WHERE device_id=? and project_token=?', [post, device_id, project_token] , function(err, result) {});
@@ -282,9 +291,9 @@ app.post('/devices',function(req, res){
                                        var sql = 'INSERT INTO deviceinfodatas SET ?';
                                        const  values = {
                                                        device_id: device_id,
-													    First_name : First_name,
-														Last_name : Last_name,
-														phone_number : phone_number,
+													                             First_name : First_name,
+                            													 Last_name : Last_name,
+                            													 phone_number : phone_number,
                                                        device_model: device_model,
                                                        os_name: os_name,
                                                        os_version : os_version,
@@ -300,10 +309,10 @@ app.post('/devices',function(req, res){
                                                        gender : gender,
                                                        language : language,
                                                        app_version : app_version,
-													   sdk_version :sdk_version,
+													                             sdk_version :sdk_version,
                                                        country : country,
-													   state : state,
-													   city : city,
+                          													   state : state,
+                          													   city : city,
                                                        project_token:project_token,
                                                        created_at:date_time,
                                                        updated_at:date_time
@@ -376,14 +385,9 @@ app.post('/fetchAppUserDetail',function(req, res){
                                       data["Data"] = "Adding values to activedevicedetails when active_status is yes ";
                                       res.json(data);
                                       console.log(result.insertId);
-									  connection.query('SELECT count from users',function(err, rows1, fields){
-                                        var realtime_activeusers = rows1[0].count;
-                                        realtime_activeusers = realtime_activeusers + 1;
-                                        var query = connection.query('UPDATE users SET count = ?', [realtime_activeusers] , function(err, result) {
-                                        });
-                                        console.log(query.sql);
+                                        // console.log(query.sql);
                                        // data["Data"] = "Token not same. So incrementing the uninstall count by 1 ";
-                                      });
+
                                       console.log("fetchAppUserDetail API ends----------------------------------------------------");
                                   }
                                 });
@@ -392,14 +396,6 @@ app.post('/fetchAppUserDetail',function(req, res){
                                data["Data"] = "active_status is no. No updates. ";
                                  console.log('active_status is no. No updates. ');
                                res.json(data);
-							   connection.query('SELECT count from users',function(err, rows1, fields){
-                                 var realtime_activeusers = rows1[0].count;
-                                 realtime_activeusers = realtime_activeusers - 1;
-                                 var query = connection.query('UPDATE users SET count = ?', [realtime_activeusers] , function(err, result) {
-                                 });
-                                 console.log(query.sql);
-                                 //data["Data"] = "Token not same. So incrementing the uninstall count by 1 ";
-                               });
                                console.log("fetchAppUserDetail API ends----------------------------------------------------");
 
                              }
@@ -414,6 +410,62 @@ app.post('/fetchAppUserDetail',function(req, res){
                 }
 });
 });
+
+
+app.post('/refferrer',function(req, res){
+    //moment().format() = dt.format('Y-m-d H:M:S');
+    console.log("refferrer API : ",moment().format());
+    console.log("refferrer API starts------------------------------------------------------------------");
+    const project_token = req.headers['authorization'];
+    const device_id = req.body.device_id;
+		const date_time = req.body.date_time;
+    const install_refferrer = req.body.install_refferrer;
+		const install_refferrer_test = req.body.install_refferrer_test;
+
+    var data = {
+        "Data":""
+    };
+    connection.query("SELECT * FROM deviceinfodatas where device_id=? and project_token=?",[device_id, project_token],function(err, result, fields){  console.log(result.length);
+                      if(result.length != 0){
+                                  const id = result[0].id;
+                                  console.log("Device ID of ", device_id, " is ", id);
+                                  var sql_new = 'INSERT INTO refferrer SET ?';
+                                  const  values_new = {
+                                  deviceid: id,
+                                  install_refferrer: install_refferrer,
+                                  install_refferrer_test : install_refferrer_test,
+                                  date_time: date_time
+                                   };
+
+                                  connection.query(sql_new, values_new, function(error_new, out_new){
+
+                                    if(!!error_new){
+                                        console.log('Error in the query while adding refferrer data to refferrer table');
+                                        data["Data"] = "Error in the query while adding refferrer data to refferrer table ";
+                                        //res.json(data);
+                                        console.log("refferrer API ends----------------------------------------------------------------");
+                                        //res.send("Error in the query");
+                                    }else{
+                                       console.log(out_new);
+                                       console.log(out_new.insertId);
+
+                                        data["Data"] = "refferrer data is pushed ";
+                                        res.json(data);
+                                        console.log("refferrer API ends----------------------------------------------------------------");
+                                    }
+                                   });
+                               }
+                               else {
+                                data["Data"] = "Authentication failed!";
+                                console.log("Authentication failed!");
+                                //data["Data"] = "Device doesn't exist in database. Please contact system administrator!";
+                                res.json(data);
+                                console.log("refferrer API ends----------------------------------------------------------------");
+                               }
+   });
+});
+
+
 
 app.post('/events',function(req, res){
     //moment().format() = dt.format('Y-m-d H:M:S');
