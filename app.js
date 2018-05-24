@@ -21,20 +21,20 @@ var moment = require('moment');
 //   database:'ebdb'
 // });
 //
-var db_config = {
-    host:'aa8xup8v02zdo7.c2jcvaebobvq.us-east-2.rds.amazonaws.com',
-    user:'walinns',
-    password:'Walinns0077',
-    database:'ebdb'
-};
-
-
 // var db_config = {
-//     host:'localhost',
-//     user:'root',
-//     password:'',
+//     host:'aa8xup8v02zdo7.c2jcvaebobvq.us-east-2.rds.amazonaws.com',
+//     user:'walinns',
+//     password:'Walinns0077',
 //     database:'ebdb'
 // };
+
+
+var db_config = {
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'ebdb'
+};
 
 var connection;
 
@@ -211,50 +211,50 @@ app.post('/devices',function(req, res){
     //moment().format() = dt.format('Y-m-d H:M:S');
     console.log("DEVICE INFO API : ",moment().format());
     console.log("DEVICE API starts---------------------------------------------------------------------------------");
-    const project_token = req.headers['authorization'];
-    const device_id = req.body.device_id;
-  	const First_name = req.body.First_name;
-  	const Last_name = req.body.Last_name;
-  	const phone_number = req.body.phone_number;
-    const device_model = req.body.device_model;
-    const os_name = req.body.os_name;
-    const os_version = req.body.os_version;
-    const connectivty = req.body.connectivity;
-    const carrier = req.body.carrier;
-    const email = req.body.email;
-    const play_service = req.body.play_service;
-    const bluetooth = req.body.bluetooth;
-    const screen_dpi = req.body.screen_dpi;
-    const screen_height = req.body.screen_height;
-    const screen_width = req.body.screen_width;
-    const age = req.body.age;
-    const gender = req.body.gender;
-    const language = req.body.language;
-    const app_version = req.body.app_version;
-	  const sdk_version = req.body.sdk_version;
-    const country = req.body.country;
-  	const state = req.body.state;
-  	const city = req.body.city;
-    const date_time = req.body.date_time;
+    var project_token = req.headers['authorization'];
+    var device_id = req.body.device_id;
+  	var First_name = req.body.First_name;
+  	var Last_name = req.body.Last_name;
+  	var phone_number = req.body.phone_number;
+    var device_model = req.body.device_model;
+    var os_name = req.body.os_name;
+    var os_version = req.body.os_version;
+    var connectivty = req.body.connectivity;
+    var carrier = req.body.carrier;
+    var email = req.body.email;
+    var play_service = req.body.play_service;
+    var bluetooth = req.body.bluetooth;
+    var screen_dpi = req.body.screen_dpi;
+    var screen_height = req.body.screen_height;
+    var screen_width = req.body.screen_width;
+    var age = req.body.age;
+    var gender = req.body.gender;
+    var language = req.body.language;
+    var app_version = req.body.app_version;
+	  var sdk_version = req.body.sdk_version;
+    var country = req.body.country;
+  	var state = req.body.state;
+  	var city = req.body.city;
+    var date_time = req.body.date_time;
     if (typeof phone_number === 'undefined')
     {
-      phone_number = 'NA';
+       phone_number = 'NA';
     }
     if (typeof First_name === 'undefined')
     {
-      First_name = 'NA';
+       First_name = 'NA';
     }
     if (typeof Last_name === 'undefined')
     {
-      Last_name = 'NA';
+       Last_name = 'NA';
     }
     if (typeof state === 'undefined')
     {
-      state = 'NA';
+       state = 'NA';
     }
     if (typeof city === 'undefined')
     {
-      city = 'NA';
+       city = 'NA';
     }
 
     var data = {
